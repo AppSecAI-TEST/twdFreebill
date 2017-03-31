@@ -11,7 +11,7 @@ import kr.co.tworld.freebill.service.FreeBillService;
 @RestController
 public class FreeBillController {
 	
-    @RequestMapping("/freebill_detail")
+    @RequestMapping("/freebill/detail")
     public HashMap getFreeBillDetail(@RequestParam("svcMgmtNum") String svcMgmtNum){
     	
     	FreeBillService freeBillService = new FreeBillService();
@@ -20,7 +20,7 @@ public class FreeBillController {
     	return result;
     } 
 	
-    @RequestMapping("/freebill_main")
+    @RequestMapping("/freebill/main")
     public HashMap getFreeBillMain(@RequestParam("svcMgmtNum") String svcMgmtNum){
     	
     	FreeBillService freeBillService = new FreeBillService();
