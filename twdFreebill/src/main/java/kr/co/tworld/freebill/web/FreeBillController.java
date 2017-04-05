@@ -27,5 +27,5 @@ public class FreeBillController {
     	HashMap result = freeBillService.freeBillMain(svcMgmtNum);
     	
     	return result;
-    }    
+    } 
 }

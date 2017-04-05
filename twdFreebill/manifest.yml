@@ -1,0 +1,9 @@
+applications:
+- name: twdFreebill
+  memory: 1G
+  instances: 1
+  path: ./target/twdFreebill-0.0.1-SNAPSHOT.war
+  random-route: true
+  buildpack: liberty-for-java
+  env:
+    JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
