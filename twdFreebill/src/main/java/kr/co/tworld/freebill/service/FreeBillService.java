@@ -5,13 +5,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import kr.co.tworld.freebill.domain.FreeBillMainVDTO;
 import kr.co.tworld.freebill.domain.FreeBillUtil;
 import kr.co.tworld.freebill.domain.StringUtil;
 import kr.co.tworld.freebill.repository.CDRSRepository;
+import kr.co.tworld.freebill.repository.Product;
+import kr.co.tworld.freebill.repository.ProductRepository;
 
+@Service
 public class FreeBillService {
- 
+	
+    @Autowired 
+    private ProductRepository productRepository;
 	/**
 	 * 잔여기본통화 조회하기 (무선 메인)
 	 * @param svcMgmtNum
@@ -71,7 +79,11 @@ public class FreeBillService {
 				failMsg = "잔여기본통화 조회를 할 수 없습니다. 자세한 사항은 상세화면을 확인해주세요.";
 			}
 
-			prodNm = "LTE 전국민 무한 85";
+			//상품명을 가져온다.
+			List<Product> list = (List<Product>) productRepository.findByProdId("NA00004120");
+			for(Product product : list){
+				prodNm = product.getProdName();
+			}
 
 			resultInfo.put("resultCode", resultCode);
 			resultInfo.put("resultMessage", failMsg);
