@@ -1,4 +1,4 @@
-package kr.co.tworld.freebill.web;
+package kr.co.tworld.freebill.controller;
 
 import java.util.HashMap;
 

@@ -1,6 +1,13 @@
 spring:
   application:
     name: twdFreebill
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://169.56.68.111:3306/tworld?useUnicode=true&charaterEncoding=euc-kr
+    username: tworld
+    password: tworld!23$ 
+  jpa:
+    show-sql: true
     
 eureka:  
   instance:    
