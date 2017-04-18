@@ -6,7 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 import kr.co.tworld.freebill.domain.FreeBillMainVDTO;
 import kr.co.tworld.freebill.domain.FreeBillUtil;
@@ -16,10 +21,31 @@ import kr.co.tworld.freebill.repository.Product;
 import kr.co.tworld.freebill.repository.ProductRepository;
 
 @Service
+@EnableHystrix
 public class FreeBillService {
 	
     @Autowired 
     private ProductRepository productRepository;
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	@HystrixCommand(fallbackMethod = "hystrixTestFallback")
+	public ResponseEntity<String> getHystrixTest(String svcMgmtNum) {
+
+//		String apiGatewayUri = "https://twdapigateway-interpervasive-pianist.sk.kr.mybluemix.net/";
+		String apiGatewayUri = "https://baboyahaha.co.kr/";
+		String msaUri = "freebill";
+		
+		ResponseEntity<String> result = restTemplate.getForEntity(apiGatewayUri + msaUri + "/freebill/main?svcMgmtNum={svcMgmtNum}", String.class, svcMgmtNum);
+		return result;
+	}
+	
+	private ResponseEntity<String> hystrixTestFallback(String svcMgmtNum, Throwable t) {
+		System.out.println("Using fallback method for getHystrixTest" + t);
+        return null;
+    } 
+	
 	/**
 	 * 잔여기본통화 조회하기 (무선 메인)
 	 * @param svcMgmtNum

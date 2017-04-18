@@ -22,7 +22,9 @@ public class CDRSRepository {
         String[] keys = new String[]{"PROD_ID","PROD_NM","SKIP_ID","SKIP_NM","TOTAL","USE","REMAIN","UNIT","REG_DT","UNLIMIT","NO_USE","TYPE","ORDER"};
         
         try{
-            
+          //0.5초 지연
+          this.sleep(500); 
+          
           String rcvMsg = "{\"message\":\"무료통화 내역 조회\",\"result\":[{\"PROD_ID\":\"NA00004120\",\"PROD_NM\":\"기본형 프리존(T-Map)\",\"SKIP_ID\":\"DDX51\",\"SKIP_NM\":\"교통정보 무제한               \",\"TOTAL\":\"0\",\"USE\":\"0\",\"REMAIN\":\"0\",\"UNIT\":\"310\",\"REG_DT\":\"\",\"UNLIMIT\":\"1\",\"NO_USE\":\"N\",\"TYPE\":\"0\",\"ORDER\":\"11200\"},{\"PROD_ID\":\"NA00004120\",\"PROD_NM\":\"기본형 프리존22(T-Map)\",\"SKIP_ID\":\"DDX51\",\"SKIP_NM\":\"교통정보 무제한               \",\"TOTAL\":\"0\",\"USE\":\"0\",\"REMAIN\":\"0\",\"UNIT\":\"310\",\"REG_DT\":\"\",\"UNLIMIT\":\"1\",\"NO_USE\":\"N\",\"TYPE\":\"0\",\"ORDER\":\"11200\"}],\"status\":\"1\",\"count\":\"13\"}";
           
           HashMap map = this.convertJSONToMap(rcvMsg);
@@ -93,5 +95,12 @@ public class CDRSRepository {
         }
         
         return list;
-    }     
+    }
+    
+    private void sleep(int time){
+        try {
+          Thread.sleep(time);
+        } catch (InterruptedException e) { }
+    }
+    
 }
