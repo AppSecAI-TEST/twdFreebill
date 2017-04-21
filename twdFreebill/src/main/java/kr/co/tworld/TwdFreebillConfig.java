@@ -1,38 +1,41 @@
 package kr.co.tworld;
 
+import java.nio.charset.Charset;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.config.java.AbstractCloudConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 @Configuration
-public class TwdFreebillConfig {
+public class TwdFreebillConfig extends AbstractCloudConfig {
+
+	@Value("${services.redis.name}")
+	private String redisName;
 	
 	@Bean
-	JedisConnectionFactory jedisConnectionFactory() {
-
-	    JedisConnectionFactory jedisConFactory = new JedisConnectionFactory();
-//	    jedisConFactory.setClientName("Redis-ma");
-	    
-	    jedisConFactory.setHostName("169.56.68.111");
-	    jedisConFactory.setPort(19236);
-	    jedisConFactory.setPassword("8f05223c-1311-4fc2-b5f8-38302c679092");
-	    
-	    return jedisConFactory;
+	public RedisConnectionFactory redisConnectionFactory() {
+		return connectionFactory().redisConnectionFactory(redisName);
 	}
-	 
+	
 	@Bean
 	public RedisTemplate<String, Object> redisTemplate() {
 	    RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
-	    template.setConnectionFactory(jedisConnectionFactory());
+	    template.setConnectionFactory(redisConnectionFactory());
 	    return template;
 	}	
 	
-	@LoadBalanced
 	@Bean
+	@LoadBalanced
 	public RestTemplate test(){
 		return new RestTemplate();
-	}	
+	}
+
 }

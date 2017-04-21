@@ -9,6 +9,10 @@ spring:
   jpa:
     show-sql: true
 
+services:
+  redis: 
+    name: Redis-ma
+
 hystrix: 
   command: 
     default: 

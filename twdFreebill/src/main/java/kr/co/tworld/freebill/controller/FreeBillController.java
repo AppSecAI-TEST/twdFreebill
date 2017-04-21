@@ -41,7 +41,7 @@ public class FreeBillController {
     
     @RequestMapping("/freebill/detail")
     public HashMap getFreeBillDetail(@RequestParam("tokenId") String token){
-    	String svcMgmtNum = (String) redisTemplate.opsForValue().get(token+":selected");
+    	String svcMgmtNum = (String) redisTemplate.opsForHash().get(token,"selected");
     	
     	System.out.println("token =" + token);
     	System.out.println("svcMgmtNum =" + svcMgmtNum);
@@ -52,7 +52,7 @@ public class FreeBillController {
 
 	@RequestMapping("/freebill/main")
 	public HashMap getFreeBillMain(@RequestParam("tokenId") String token){
-    	String svcMgmtNum = (String) redisTemplate.opsForValue().get(token+":selected");
+    	String svcMgmtNum = (String) redisTemplate.opsForHash().get(token,"selected");
     	
     	System.out.println("token =" + token);
     	System.out.println("svcMgmtNum =" + svcMgmtNum);
