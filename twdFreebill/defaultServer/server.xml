@@ -19,5 +19,5 @@
     </featureManager>
     <application name="twdFreebill" location="twdFreebill-0.0.1-SNAPSHOT.war" type="war" context-root="/"/>
     <webContainer deferServletLoad="false" />
-       <cdi12 enableImplicitBeanArchives='false'/>
+    <cdi12 enableImplicitBeanArchives='false'/>
 </server>

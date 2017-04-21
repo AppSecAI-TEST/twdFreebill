@@ -39,7 +39,7 @@ public class FreeBillController {
     @Autowired
     private FreeBillService freeBillService;
     
-    @RequestMapping("/freebill/detail")
+    @RequestMapping(value="/freebill/detail")
     public HashMap getFreeBillDetail(@RequestParam("tokenId") String token){
     	String svcMgmtNum = (String) redisTemplate.opsForHash().get(token,"selected");
     	
