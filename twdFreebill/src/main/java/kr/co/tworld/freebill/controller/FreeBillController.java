@@ -16,23 +16,6 @@ import kr.co.tworld.freebill.service.FreeBillService;
 @RestController
 public class FreeBillController {
 	
-//
-//	
-//    @RequestMapping("/freebill/detail")
-//    public HashMap getFreeBillDetail(@RequestParam("svcMgmtNum") String svcMgmtNum){
-//    	HashMap result = freeBillService.getFreeBillDetail(svcMgmtNum);
-//    	
-//    	return result;
-//    } 
-//    
-//    @RequestMapping("/freebill/main")
-//    public HashMap getFreeBillMain(@RequestParam("svcMgmtNum") String svcMgmtNum){
-//    	HashMap result = freeBillService.freeBillMain(svcMgmtNum);
-//    	
-//    	return result;
-//    }  
-    
-	@Autowired
 	@Resource(name="redisTemplate")
     private RedisTemplate<String, Object> redisTemplate;
 	
