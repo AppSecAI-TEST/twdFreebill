@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,8 @@ import kr.co.tworld.freebill.service.FreeBillService;
 @RestController
 public class FreeBillController {
 	
+	private static Logger logger = LoggerFactory.getLogger(FreeBillController.class);
+
 	@Resource(name="redisTemplate")
     private RedisTemplate<String, Object> redisTemplate;
 	
@@ -26,8 +30,8 @@ public class FreeBillController {
     public HashMap getFreeBillDetail(@RequestParam("tokenId") String token){
     	String svcMgmtNum = (String) redisTemplate.opsForHash().get(token,"selected");
     	
-    	System.out.println("token =" + token);
-    	System.out.println("svcMgmtNum =" + svcMgmtNum);
+    	logger.debug("token == " + token);
+    	logger.debug("svcMgmtNum == " + svcMgmtNum);
     	
     	HashMap result = freeBillService.getFreeBillDetail(svcMgmtNum);
     	return result;
@@ -37,8 +41,9 @@ public class FreeBillController {
 	public HashMap getFreeBillMain(@RequestParam("tokenId") String token){
     	String svcMgmtNum = (String) redisTemplate.opsForHash().get(token,"selected");
     	
-    	System.out.println("token =" + token);
-    	System.out.println("svcMgmtNum =" + svcMgmtNum);
+    	logger.debug("token == " + token);
+    	logger.debug("svcMgmtNum == " + svcMgmtNum);
+    	logger.error("error log level~");
     	
 		HashMap result = freeBillService.freeBillMain(svcMgmtNum);
 		return result;

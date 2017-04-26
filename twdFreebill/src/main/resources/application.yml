@@ -12,6 +12,16 @@ spring:
 services:
   redis: 
     name: Redis-ma
+  logstash:
+    name: logstash-drain
+
+debug: true
+logging:
+  level:
+    org.springframework.web: ERROR
+    kr.co.tworld: DEBUG
+  pattern:
+    console: ${spring.application.name} %d{yyyy:MM:dd} %-5level --- [%thread] %logger{35} / %msg %n
 
 hystrix: 
   command: 
