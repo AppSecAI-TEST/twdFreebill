@@ -23,6 +23,9 @@ logging:
   pattern:
     console: ${spring.application.name} %d{yyyy:MM:dd} %-5level --- [%thread] %logger{35} / %msg %n
 
+server:
+  port: ${PORT}
+
 hystrix: 
   command: 
     default: 
