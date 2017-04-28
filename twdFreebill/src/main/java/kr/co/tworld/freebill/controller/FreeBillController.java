@@ -4,8 +4,6 @@ import java.util.HashMap;
 
 import javax.annotation.Resource;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +16,6 @@ import kr.co.tworld.freebill.service.FreeBillService;
 @RestController
 public class FreeBillController {
 	
-	private static Logger logger = LoggerFactory.getLogger(FreeBillController.class);
-
 	@Resource(name="redisTemplate")
     private RedisTemplate<String, Object> redisTemplate;
 	
@@ -28,30 +24,19 @@ public class FreeBillController {
     
     @RequestMapping(value="/freebill/detail")
     public HashMap getFreeBillDetail(@RequestParam("tokenId") String token){
-    	String svcMgmtNum = (String) redisTemplate.opsForHash().get(token,"selected");
-    	
-    	logger.debug("token == " + token);
-    	logger.debug("svcMgmtNum == " + svcMgmtNum);
-    	
-    	HashMap result = freeBillService.getFreeBillDetail(svcMgmtNum);
+    	HashMap result = freeBillService.getFreeBillDetail(token);
     	return result;
     } 
 
 	@RequestMapping("/freebill/main")
 	public HashMap getFreeBillMain(@RequestParam("tokenId") String token){
-    	String svcMgmtNum = (String) redisTemplate.opsForHash().get(token,"selected");
-    	
-    	logger.debug("token == " + token);
-    	logger.debug("svcMgmtNum == " + svcMgmtNum);
-    	logger.error("error log level~");
-    	
-		HashMap result = freeBillService.freeBillMain(svcMgmtNum);
+		HashMap result = freeBillService.freeBillMain(token);
 		return result;
 	} 
    
 	@RequestMapping("/freebill/hystrixtest")
-	public ResponseEntity<String> getHystrixTest(@RequestParam("svcMgmtNum") String svcMgmtNum){
-		ResponseEntity<String> result = freeBillService.getHystrixTest(svcMgmtNum);
+	public ResponseEntity<String> getHystrixTest(@RequestParam("tokenId") String token){
+		ResponseEntity<String> result = freeBillService.getHystrixTest(token);
 		return result;
 	}
 }

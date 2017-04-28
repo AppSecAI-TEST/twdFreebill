@@ -7,7 +7,9 @@ import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class CDRSRepository {
     /**
      * 잔여기본통화 CDRS 데이터를 가져온다.

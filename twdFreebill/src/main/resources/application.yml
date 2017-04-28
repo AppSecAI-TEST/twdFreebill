@@ -9,6 +9,12 @@ spring:
   jpa:
     show-sql: true
 
+uri:
+  apigateway: https://twdapigateway-interpervasive-pianist.sk.kr.mybluemix.net
+  login: /login
+  freebill: /freebill
+  main: /main
+  
 services:
   redis: 
     name: Redis-ma
