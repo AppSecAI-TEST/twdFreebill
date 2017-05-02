@@ -1,11 +1,11 @@
 spring:
   application:
     name: twdFreebill
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://169.56.68.111:3306/tworld?useUnicode=true&charaterEncoding=euc-kr
-    username: tworld
-    password: tworld!23$ 
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://169.56.68.111:3306/tworld?useUnicode=true&charaterEncoding=euc-kr
+#    username: tworld
+#    password: tworld!23$ 
   jpa:
     show-sql: true
 
@@ -20,7 +20,9 @@ services:
     name: Redis-ma
   logstash:
     name: logstash-drain
-
+  database:
+    name: maria-db
+    
 debug: true
 logging:
   level:
