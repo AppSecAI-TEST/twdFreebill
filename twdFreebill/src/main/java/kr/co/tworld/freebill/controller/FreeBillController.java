@@ -2,10 +2,7 @@ package kr.co.tworld.freebill.controller;
 
 import java.util.HashMap;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,9 +12,6 @@ import kr.co.tworld.freebill.service.FreeBillService;
 
 @RestController
 public class FreeBillController {
-	
-	@Resource(name="redisTemplate")
-    private RedisTemplate<String, Object> redisTemplate;
 	
     @Autowired
     private FreeBillService freeBillService;
